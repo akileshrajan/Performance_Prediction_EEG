@@ -95,27 +95,27 @@ def preprocess_data(window_size):
                         print(line_item)
                         count = 0
 
-                        if len(beta_timestamp) < 15:
+                        if len(beta_timestamp) < window_size:
                             beta_timestamp.append(line_item[0])
                             # beta_file.write(str(line_item[0]) + ' ')
                         else:
                             beta_timestamp = [line_item[0]]
                             # beta_file.write(str(line_item[0]) + ' ')
 
-                        if len(beta_timestamp) == 15:
+                        if len(beta_timestamp) == window_size:
                             for i in range(len(beta_timestamp)):
                                 beta_file.write(str(beta_timestamp[i])+' ')
                                 count += 1
                             beta_file.write('\n')
 
-                    if len(beta_timestamp) < 15:
+                    if len(beta_timestamp) < window_size:
                         betafile = open(filepath + '/beta' + '_' + str(num[0]), 'a+')
                         count = 0
                         for i in range(len(beta_timestamp)):
                             betafile.write(str(beta_timestamp[i])+' ')
                             count += 1
 
-                        while count < 15:
+                        while count < window_size:
                             betafile.write(str(0)+' ')
                             count += 1
                         betafile.write('\n')
@@ -124,4 +124,4 @@ def preprocess_data(window_size):
 if __name__ == '__main__':
     data_path = "/media/akilesh/data/sequencelearning_eeg"
     #main()
-    preprocess_data(15)
+    preprocess_data(30)
