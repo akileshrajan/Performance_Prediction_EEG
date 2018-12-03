@@ -73,15 +73,15 @@ class PerformancePrediction:
         # n_timesteps, n_features, n_outputs = self.trainX[0].shape[1], self.trainX.shape[2], self.trainY.shape[1]
         n_timesteps, n_outputs = self.trainX[0].shape[0], 1
 
-        self.model.add(LSTM(100, input_shape=(n_timesteps, 1)))
-        self.model.add(Dropout(0.5))
+        self.model.add(LSTM(50, input_shape=(n_timesteps, 1)))
+        self.model.add(Dropout(0.25))
         self.model.add(Dense(50, activation='relu'))
         self.model.add(Dense(n_outputs, activation='softmax'))
         self.model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     # fit and evaluate a model
     def evaluate_model(self):
-        verbose, epochs, batch_size = 0, 15, 64
+        verbose, epochs, batch_size = 0, 25, 16
         print(self.model.summary())
 
         # fit network
@@ -103,13 +103,6 @@ class PerformancePrediction:
         print(self.data.shape,'\n')
         print(self.trainX[0].shape, self.trainY.shape)
 
-        # i =0
-        # for items in self.trainX:
-        #     print(items)
-        #     print(self.trainY[i])
-        #     i += 1
-        #     break
-
         # Define an LSTM model
         self.define_model()
 
@@ -117,7 +110,7 @@ class PerformancePrediction:
         scores = list()
         for r in range(repeats):
             score = self.evaluate_model()
-
+            print("raw score",score)
             score = score * 100.0
             print('>#%d: %.3f' % (r + 1, score))
             scores.append(score)

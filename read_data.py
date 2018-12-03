@@ -32,7 +32,7 @@ def main():
             lines = logfile.readlines()
             logfile.close()
 
-            dest_dir = os.path.join(filepath, 'beta')
+            dest_dir = os.path.join(new_path, user_folder, session, 'beta')
 
             try:
                 os.makedirs(dest_dir)
@@ -122,6 +122,10 @@ def preprocess_data(window_size):
 
 
 if __name__ == '__main__':
-    data_path = "/media/akilesh/data/sequencelearning_eeg"
-    #main()
-    preprocess_data(30)
+    data_path = "/media/akilesh/data/data"
+    new_path = "/media/akilesh/data/data_raw"
+
+    # Function to create raw daa with mean and individual betas
+    main()
+    # Function to split data into windows
+    #preprocess_data(30)
